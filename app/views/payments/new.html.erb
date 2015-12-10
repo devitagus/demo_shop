@@ -1,0 +1,14 @@
+<h1>Payments of book <%= @order.book_isbn %></h1>
+<%= form_tag order_payments_path(@order)  do %>
+  <label class="amount">
+    <span>Amount: <%= humanized_money_with_symbol(@order.amount) %></span>
+  </label>
+
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="My Book"
+    data-description="Book <%= @order.book_isbn %>"
+    data-amount="<%= @order.amount_cents %>"
+    data-currency="EUR"></script>
+<% end %>

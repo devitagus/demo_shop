@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+
+  get 'payments/new'
+
+  resources :books, only: [:index, :show]
+  resources :orders, only: [:create, :show]  do
+    resources :payments, only: [:new, :create]
+  end
+
+  root to: 'books#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
